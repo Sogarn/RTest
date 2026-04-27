@@ -1,33 +1,19 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
-
 library(shiny)
+library(bslib)
 
-# Define UI for application that draws a histogram
+# Define UI ----
 fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
+  # Set up sidebar
+  page_sidebar(
+    title = "My Shiny App",
+    sidebar = sidebar(global_sidebar_text,
+                      code('install.packages("shiny")')
+                      ),
+    card(
+      card_header("Introducing Shiny"),
+      global_card_text,
+      card_image("https://shiny.posit.co/r/getstarted/shiny-basics/lesson2/images/my-shiny-app.png", height = "300px"),
+      card_footer("Shiny is a product of Posit")
     )
+  )
 )
