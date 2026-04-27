@@ -3,90 +3,36 @@ library(bslib)
 
 # Define UI ----
 fluidPage(
-  # Set up widgets
-  titlePanel("Basic widgets"),
-  layout_columns(
-    col_width = 3,
-    card(
-      card_header("Buttons"),
-      actionButton("action", "Action"),
-      submitButton("Submit")
-    ),
-    card(
-      card_header("Single checkbox"),
-      checkboxInput("checkbox", "Choice A", value = TRUE)
-    ),
-    card(
-      card_header("Checkbox group"),
-      checkboxGroupInput(
-        "checkGroup",
-        "Select all that apply",
-        choices = list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3),
-        selected = 1
-      )
-    ),
-    card(
-      card_header("Date input"),
-      dateInput("date", "select date", value = "2014-01-01")
-    ),
-    card(
-      card_header("Date range input"),
-      dateRangeInput("dates", "Select dates")
-    ),
-    card(
-      card_header("File input"),
-      fileInput("file", label = NULL)
-    ),
-    card(
-      card_header("Help text"),
+  # Set up widget test
+  page_sidebar(
+    title = "censusVis",
+    sidebar = sidebar(
       helpText(
-        "Note: help text isn't a true widget,",
-        "but it provides an easy way to add texxt to",
-        "accompany other widgets."
-      )
-    ),
-    card(
-      card_header("Numeric input"),
-      numericInput("num", "Input number", value = 1)
-    ),
-    card(
-      card_header("Radio buttons"),
-      radioButtons(
-        "radio",
-        "Select option",
-        choices = list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3),
-        selected = 1
-      )
-    ),
-    card(
-      card_header("Select box"),
+        "Create demographic maps with information from the 2010 US Census"
+      ),
       selectInput(
-        "select",
-        "Select option",
-        choices = list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3),
-        selected = 1
-      )
-    ),
-    card(
-      card_header("Sliders"),
-      sliderInput(
-        "slider1",
-        "Set value",
-        min = 0,
-        max = 100,
-        value = 50
+        "selectInput1",
+        "Choose a variable to display",
+        choices = c("Percent White", "Percent Black",
+                       "Percent Hispanic", "Percent Asian"),
+        selected = "Percent White",
       ),
       sliderInput(
-        "slider2",
-        "Set value",
+        "sliderInput1",
+        "Range of interest:",
         min = 0,
         max = 100,
-        value = c(25, 75)
-      )
+        value = c(0,100)
+      ),
+      sliderInput(
+        "sliderInput2",
+        "Range of interest:",
+        min = 0,
+        max = 100,
+        value = c(0,100)
+      ),
     ),
-    card(
-      card_header("Text input"),
-      textInput("text", label = NULL, value = "Enter text...")
-    )
-  )
+    textOutput("selected_var"),
+    textOutput("slider_var")
+  ),
 )
