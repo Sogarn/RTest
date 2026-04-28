@@ -1,5 +1,9 @@
 library(shiny)
 library(bslib)
+library(maps)
+library(mapproj)
+source("helpers.R")
+counties <- readRDS("data/counties.rds")
 
 # Define UI ----
 fluidPage(
@@ -13,8 +17,10 @@ fluidPage(
       selectInput(
         "selectInput1",
         "Choose a variable to display",
-        choices = c("Percent White", "Percent Black",
-                       "Percent Hispanic", "Percent Asian"),
+        choices = c("Percent White",
+                    "Percent Black",
+                    "Percent Hispanic",
+                    "Percent Asian"),
         selected = "Percent White",
       ),
       sliderInput(
@@ -25,7 +31,6 @@ fluidPage(
         value = c(0,100)
       ),
     ),
-    textOutput("selected_var"),
-    textOutput("slider_var")
+    card(plotOutput("map"))
   ),
 )
